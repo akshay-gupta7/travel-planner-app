@@ -12,18 +12,21 @@ function checkisempty(city) {
     return 1;
 }
 
-function datediff(date1){
+function datediff(dd){
     let d= new Date();
+    const date = document.getElementById('dates').value;
     if (date=''){
         alert("Date is empty");
         return "Date is empty";
     }
-
-    let todayDate = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
-    const Date1= new Date(date1);
+    
+    const todayDate = d.getFullYear() + '-0' + (d.getMonth()+1) + '-' + d.getDate();
+    console.log("DATE in Todaydate is", todayDate);
+    const Date1= new Date(date);
     const Date2 = new Date(todayDate);
     const time = Date1.getTime() - Date2.getTime();
     const days = Math.round(time/(1000 * 60 * 60 * 24));
+    console.log("Reached here", Date1, Date2,  days);
     return days;
 }
 
@@ -31,8 +34,9 @@ function runProcess(event){
     event.preventDefault();
     const city = document.getElementById('city').value;
     const date = document.getElementById('dates').value;
-    const dateoftrip = new Date(date);
-    const num_days = datediff(date);
+    const date_obj = new Date(date);
+    const num_days = datediff(date_obj);
+    console.log("here", date, date_obj, num_days)
     if(checkisempty(city)==1){
         alert("Please enter a city before clicking on button");
         return false;//function will stop here if City is empty
@@ -89,12 +93,17 @@ function runProcess(event){
                 const data = await res.json();
                 console.log("Data is:", data );
                 const country = data.country_code;
-                const line_one = "The forecast OF next 3 days(Date, Min Max Temp and conditions) for " + city + ", " + country + " is:";
+                const line_one = "Your trip to " + city + "," + country + " is in " + num_days + " days.";
+                const line_two = "The forecast of tge next 3 days(Date, Min Max Temp and conditions) for " + city + ", " + country + " is:";
                 const forecast = document.getElementsByClassName('forecast');
-                const creatediv = document.createElement("div");
-                const textnode = document.createTextNode(line_one);
-                creatediv.appendChild(textnode);
-                forecast[0].appendChild(creatediv);
+                const creatediv1 = document.createElement("div");
+                const textnode1 = document.createTextNode(line_one);
+                const creatediv2 = document.createElement("div");
+                const textnode2 = document.createTextNode(line_two);
+                creatediv1.appendChild(textnode1);
+                forecast[0].appendChild(creatediv1);
+                creatediv2.appendChild(textnode2);
+                forecast[0].appendChild(creatediv2);
                 console.log(forecast);
                 for(let i=1; i<=3; i++){
                     //const node = document.createElement("li");
