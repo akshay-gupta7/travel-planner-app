@@ -7,7 +7,7 @@ dotenv.config();
 const app = express()
 
 // designates what port the app will listen to for incoming requests
-const port = 7171;
+const port = 7180;
 
 app.use(express.static('dist'))
 
@@ -17,9 +17,11 @@ const geo_api_key = process.env.GEO_API_KEY;
 const weather_api_key = process.env.WEATHER_API_KEY;
 const pix_api_key = process.env.PIX_API_KEY;
 
-const geo_base_url = 'http://api.geonames.org/searchJSON?q';
-const weather_base_url = 'https://api.weatherbit.io/v2.0/forecast/daily?';
-const pix_base_url = 'https://pixabay.com/api/?'
+const keys={
+    'geo_key': geo_api_key, 
+    'weather_key' : weather_api_key,
+    'pixa_key': pix_api_key
+}
 
 app.get('/', function (req, res) {
     // res.sendFile('dist/index.html')
@@ -32,7 +34,7 @@ app.listen(port, function () {
 
 
 
-app.get('/api', function (req, res) {
-    console.log("and here")
-    res.send(apikey)
+app.get('/key', function (req, res) {
+    console.log("and here", keys)
+    res.send(keys)
 })
