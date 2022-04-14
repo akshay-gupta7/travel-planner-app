@@ -1,6 +1,6 @@
 const geo_base_url = 'http://api.geonames.org/searchJSON?q';
 const weather_base_url = 'https://api.weatherbit.io/v2.0/forecast/daily?lat=';
-const pix_base_url = 'https://pixabay.com/api/?'
+const pix_base_url = 'https://pixabay.com/api/?key='
 
 let keyobject={};
 
@@ -64,7 +64,6 @@ function runProcess(event){
         return response;
     });
     const resfromweather = resfromgeoapi.then((value)=>{
-        console.log("I am here", value);
         //https://api.weatherbit.io/v2.0/forecast/daily?lat=38.123&lon=-78.543&key=135cc7a96fd6416cbe531c18beccfaca
         const final_weather_url = weather_base_url + value.lat + "&lon=" + value.long + "&key=" + keyobject.weather_key;
         console.log("Weatherfinal URL is ", final_weather_url );
@@ -102,6 +101,29 @@ function runProcess(event){
             }
         };
         const response = resfromweather(final_weather_url,{});
+        return response;
+    });
+    const resfrompixar = resfromweather.then((value)=>{
+        const final_pixar_url = pix_base_url + keyobject.pixa_key + "&q=" + city + "&image_type=photo&pretty=true";
+        console.log("I am here ", final_pixar_url );
+        const resfrompixars = async(url='', data={})=>{
+            //console.log("reaching here",data);
+            const res = await fetch(url)
+            try{
+                const data = await res.json();
+                console.log("Data is:", data.hits[0].webformatURL);
+                const image = document.getElementsByClassName('image');
+                const img = document.createElement("img");
+                img.src = data.hits[0].webformatURL;
+                img.width="100";
+                img.height="100";
+                image[0].appendChild(img);
+            }
+            catch(error){
+                console.log("error", error);
+            }
+        }
+        const response = resfrompixars(final_pixar_url,{});
         return response;
     });
 }

@@ -7,7 +7,7 @@ dotenv.config();
 const app = express()
 
 // designates what port the app will listen to for incoming requests
-const port = 7214;
+const port = 7225;
 
 app.use(express.static('dist'))
 
