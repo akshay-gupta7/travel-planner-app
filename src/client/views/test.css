@@ -12,6 +12,23 @@ body{
     background-color: lightblue
 }
 
+.button{
+    transition: 0.5s;
+    font-size: 12px;
+}
+
+.button:hover{
+    background-color: #3e8e41;
+    color: white;
+    
+}
+
+.inputbox:hover{
+    background-color: grey;
+    color: white;
+    
+}
+
 /*First coding for Small Screens less than 500px*/
 
 .container{
