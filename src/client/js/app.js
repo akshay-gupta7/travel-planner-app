@@ -139,7 +139,7 @@ function runProcess(event){
                 const image = document.getElementsByClassName('image');
                 const img = document.createElement("img");
                 img.src = data.hits[0].webformatURL;
-                img.width="300";
+                img.width="175";
                 img.height="100";
                 image[0].appendChild(img);
             }
