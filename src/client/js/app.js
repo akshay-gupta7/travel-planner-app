@@ -60,6 +60,7 @@ function runProcess(event){
         }
     }
     const keys=key(apiurl,{});
+    //now, using the keys and city name, fetch latitude and longitute from Geonames
     const resfromgeoapi=keys.then((value)=>
     {
         keyobject=value;
@@ -82,6 +83,7 @@ function runProcess(event){
         const response = resfromgeo(final_geo_url,{});
         return response;
     });
+    //now that we have the weatherdata, all we need is the picture of the place from pixabay, will also append in via the DOM tree
     const resfromweather = resfromgeoapi.then((value)=>{
         //https://api.weatherbit.io/v2.0/forecast/daily?lat=38.123&lon=-78.543&key=135cc7a96fd6416cbe531c18beccfaca
         const final_weather_url = weather_base_url + value.lat + "&lon=" + value.long + "&key=" + keyobject.weather_key;
