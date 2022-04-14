@@ -7,7 +7,7 @@ dotenv.config();
 const app = express()
 
 // designates what port the app will listen to for incoming requests
-const port = 7248;
+const port = 7251;
 
 app.use(express.static('dist'))
 
@@ -48,4 +48,6 @@ app.get('/key', function (req, res) {
     res.send(keys)
 })
 
-export {getkeyvaluesfromenv}
+module.exports = {
+    getkeyvaluesfromenv
+}

@@ -14,7 +14,7 @@ function checkisempty(city) {
 
 function datediff(dd){
     let d= new Date();
-    const date = document.getElementById('dates').value;
+    let date = document.getElementById('dates').value;
     if (date=''){
         alert("Date is empty");
         return "Date is empty";
