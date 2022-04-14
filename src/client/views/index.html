@@ -3,46 +3,45 @@
     <head>
         <meta charset="utf-8">
         <title>Travel Planner App</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./test.css">
     </head>
 
     <body>
-
-        <header>
-            <div class="">
-                Logo
+        <div class="container">
+            <div class="header">My Travel Planner for Udacity Capstone</div>
+            <div class="content">
+                <div class="trip-details">
+                    <form action="#">
+                        <div class="input-box">
+                            <span class="details">City Name</span>
+                            <input type="text" placeholder="Enter city planning to travel" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Enter Date</span>
+                            <input type="date" required>
+                        </div>
+                        <div class="button">
+                            <input type="submit" value="Add Trip">
+                        </div>
+                    </form>
+                </div>
+                    <div class="output">
+                            <div class ="image"> Image goes here</div>
+                            <div class="forecast">Forecast goes here</div>
+                    </div>
             </div>
-            <div class="">
-                navigation
-            </div>
-        </header>
-
-        <main>
-            <section>
-                <form class="field" >
-                    <input id="artlink" type="text" name="input" value="" onblur="onBlur()" placeholder="Enter Article URL" required/>
-                    <button id="generate" type = "submit" onclick="handleSubmit()"> Generate </button>
-                </form>
-                
-            </section>
-
-            <section>
-                <strong>Form Results:</strong>
-                <div id="results"></div>
-            </section>
-        </main>
-
-        <footer>
-            <p>This is a footer</p>
-        </footer>
+            <div class="footer">This is footer</div>
+        </div>
 
         <script>
             // Check that service workers are supported
-            if ('serviceWorker' in navigator) {
+            /*if ('serviceWorker' in navigator) {
                 // Use the window load event to keep the page load performant
                 window.addEventListener('load', () => {
                     navigator.serviceWorker.register('/service-worker.js');
                 });
-            }
+            }*/
         </script>
 
     </body>
