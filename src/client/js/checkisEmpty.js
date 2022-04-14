@@ -1,4 +1,4 @@
-function checkempty(city) {
+/*function checkempty(city) {
     if(city){
         //alert("Its not empty");
         return 0;
@@ -7,3 +7,4 @@ function checkempty(city) {
 }
 
 export { checkempty }
+*/
