@@ -12,12 +12,27 @@ function checkisempty(city) {
     return 1;
 }
 
+function datediff(date1){
+    let d= new Date();
+    if (date=''){
+        alert("Date is empty");
+        return "Date is empty";
+    }
+
+    let todayDate = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
+    const Date1= new Date(date1);
+    const Date2 = new Date(todayDate);
+    const time = Date1.getTime() - Date2.getTime();
+    const days = Math.round(time/(1000 * 60 * 60 * 24));
+    return days;
+}
+
 function runProcess(event){
     event.preventDefault();
     const city = document.getElementById('city').value;
     const date = document.getElementById('dates').value;
     const dateoftrip = new Date(date);
-    console.log("City and date is", city, dateoftrip);
+    const num_days = datediff(date);
     if(checkisempty(city)==1){
         alert("Please enter a city before clicking on button");
         return false;//function will stop here if City is empty
@@ -74,7 +89,7 @@ function runProcess(event){
                 const data = await res.json();
                 console.log("Data is:", data );
                 const country = data.country_code;
-                const line_one = "The forecast for next 3 days(Date, Min Max Temp and conditions) for " + city + ", " + country + " is:";
+                const line_one = "The forecast OF next 3 days(Date, Min Max Temp and conditions) for " + city + ", " + country + " is:";
                 const forecast = document.getElementsByClassName('forecast');
                 const creatediv = document.createElement("div");
                 const textnode = document.createTextNode(line_one);
@@ -115,7 +130,7 @@ function runProcess(event){
                 const image = document.getElementsByClassName('image');
                 const img = document.createElement("img");
                 img.src = data.hits[0].webformatURL;
-                img.width="100";
+                img.width="300";
                 img.height="100";
                 image[0].appendChild(img);
             }
@@ -128,4 +143,8 @@ function runProcess(event){
     });
 }
 
+
+
 export {runProcess}
+export {checkisempty}
+export {datediff}
