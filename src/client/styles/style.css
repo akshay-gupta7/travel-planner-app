@@ -71,6 +71,8 @@ body{
 }
 
 .container .content .output{
+    display: flex;
+    flex-direction: column;
     border-radius: 10px;
     border: solid 3px black;
     background-color: lightblue;

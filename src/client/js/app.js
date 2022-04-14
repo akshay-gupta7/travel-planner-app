@@ -16,7 +16,8 @@ function runProcess(event){
     event.preventDefault();
     const city = document.getElementById('city').value;
     const date = document.getElementById('dates').value;
-    console.log("City and date is", city, date);
+    const dateoftrip = new Date(date);
+    console.log("City and date is", city, dateoftrip);
     if(checkisempty(city)==1){
         alert("Please enter a city before clicking on button");
         return false;//function will stop here if City is empty
@@ -73,6 +74,27 @@ function runProcess(event){
             try{
                 const data = await res.json();
                 console.log("Data is:", data );
+                const country = data.country_code;
+                const line_one = "The forecast for next 3 days(Date, Min Max Temp and conditions) for " + city + ", " + country + " is:";
+                const forecast = document.getElementsByClassName('forecast');
+                const creatediv = document.createElement("div");
+                const textnode = document.createTextNode(line_one);
+                creatediv.appendChild(textnode);
+                forecast[0].appendChild(creatediv);
+                console.log(forecast);
+                for(let i=1; i<=3; i++){
+                    //const node = document.createElement("li");
+                    const today_date = data.data[i].datetime;
+                    const min_temp = data.data[i].min_temp;
+                    const max_temp = data.data[i].max_temp;
+                    const weather = data.data[i].weather.description;
+                    const texttodisplay = "" + today_date + " " + min_temp + " " + max_temp + " " + weather;
+                    const createdivweather = document.createElement("div");
+                    const textnodetodisplay = document.createTextNode(texttodisplay);
+                    createdivweather.appendChild(textnodetodisplay);
+                    forecast[0].appendChild(createdivweather);
+                    //console.log("Min temp is ", weather);
+                }
                 return data;
             }
             catch(error){
